@@ -4,11 +4,19 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static int taskAdder(Task[] taskArray, int count){
+        System.out.println("Got it. I've added this task: \n" + taskArray[count]);
+        count++;
+        System.out.println("Now you have " + count + " tasks in the list");
+        return count;
+    }
+
     public static void main(String[] args) {
         String line;
         Task[] taskArray = new Task[100];
-        int count = 0;
         String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        int count = 0;
 
         System.out.println(format);
         System.out.println("Hey I'm Butler!\n");
@@ -35,10 +43,8 @@ public class Duke {
                 System.out.println(format);
                 System.out.println("Here are the tasks in your list:\n");
                 for(int i = 0; i < count; i++){
-                    if (taskArray[i].description != null) {
-                        System.out.println(numberedPoint + ". " + taskArray[i]);
-                        numberedPoint++;
-                    }
+                    System.out.println(numberedPoint + ". " + taskArray[i]);
+                    numberedPoint++;
                 }
                 System.out.println(format);
 
@@ -47,34 +53,28 @@ public class Duke {
                 taskArray[doneItem].isCompleted();
                 System.out.println(format);
                 System.out.println("Nice! I've marked this task as done:\n");
-                System.out.println("[" + taskArray[doneItem].getStatusIcon() + "] " + taskArray[doneItem].description + "\n");
+                System.out.println(taskArray[doneItem]);
                 System.out.println(format);
             }
 
             else if (stringArray[0].equals("todo")){ //ADDING A TODO
                 System.out.println(format);
                 taskArray[count] = new ToDos (stringArray[1]);
-                System.out.println("Got it. I've added this task: \n" + taskArray[count]);
-                count++;
-                System.out.println("Now you have " + count + " tasks in the list");
+                count = taskAdder(taskArray, count);
                 System.out.println(format);
             }
 
             else if (stringArray[0].equals("deadline")){ //ADDING A DEADLINE
                 System.out.println(format);
                 taskArray[count] = new Deadline (deadlineArray[0], deadlineArray[1]);
-                System.out.println("Got it. I've added this task: \n" + taskArray[count]);
-                count++;
-                System.out.println("Now you have " + count + " tasks in the list");
+                count = taskAdder(taskArray, count);
                 System.out.println(format);
             }
 
             else if (stringArray[0].equals("event")){ //ADDING AN EVENT
                 System.out.println(format);
                 taskArray[count] = new Event (eventdateArray[0], eventdateArray[1]);
-                System.out.println("Got it. I've added this task: \n" + taskArray[count]);
-                count++;
-                System.out.println("Now you have " + count + " tasks in the list");
+                count = taskAdder(taskArray, count);
                 System.out.println(format);
             }
         }
