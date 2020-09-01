@@ -15,4 +15,13 @@ public class Task {
         isDone = true;
     }
 
+    public String getTypeIcon(){
+        return "[ ]";
+    }
+
+    @Override
+    public String toString(){
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
 }
