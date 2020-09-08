@@ -1,3 +1,5 @@
+package ;
+
 import jdk.swing.interop.SwingInterOpUtils;
 
 import java.util.Arrays;
