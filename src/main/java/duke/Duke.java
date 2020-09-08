@@ -1,14 +1,18 @@
-package ;
+package duke;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
-import java.util.Arrays;
 import java.util.Scanner;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.EmptyDateException;
+import duke.exception.WrongCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Duke {
 
     static Task[] taskArray = new Task[100];
-    static String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    public static String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     static int count = 0;
 
     public static int taskAdder(Task[] taskArray, int count){
