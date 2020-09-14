@@ -14,7 +14,7 @@ public class EmptyDescriptionException extends DukeException{
     @Override
     public void displayException(){
         System.out.println(Duke.format);
-        System.out.println("The description of a " + wrongAction + " cannot be empty! Please try again!\n");
+        System.out.println("The description of a " + "'" + wrongAction + "'" + " cannot be empty! Please try again!\n");
         System.out.println(Duke.format);
     }
 }

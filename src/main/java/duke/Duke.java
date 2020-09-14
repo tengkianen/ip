@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyDateException;
@@ -11,13 +12,20 @@ import duke.task.ToDo;
 
 public class Duke {
 
-    static Task[] taskArray = new Task[100];
+    static ArrayList <Task> taskArrayList = new ArrayList<Task>();
     public static String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     static int count = 0;
 
-    public static int taskAdder(Task[] taskArray, int count){
-        System.out.println("Got it. I've added this task: \n" + taskArray[count]);
+    public static int taskAdder(ArrayList<Task> taskArrayList, int count){
+        System.out.println("Got it. I've added this task: \n" + taskArrayList.get(count));
         count++;
+        System.out.println("Now you have " + count + " tasks in the list");
+        return count;
+    }
+
+    public static int taskRemover(ArrayList<Task> taskArrayList, int index, int count){
+        System.out.println("Noted. I've removed this task: \n" + taskArrayList.get(index));
+        count--;
         System.out.println("Now you have " + count + " tasks in the list");
         return count;
     }
@@ -34,17 +42,17 @@ public class Duke {
             System.out.println(format);
             System.out.println("Here are the tasks in your list:\n");
             for(int i = 0; i < count; i++){
-                System.out.println(numberedPoint + ". " + taskArray[i]);
+                System.out.println(numberedPoint + ". " + taskArrayList.get(i));
                 numberedPoint++;
             }
             System.out.println(format);
 
         } else if (userInput[0].equals("done")){ //COMPLETING A TASK
             int doneItem = Integer.parseInt(userInput[1]) - 1;
-            taskArray[doneItem].isCompleted();
+            taskArrayList.get(doneItem).isCompleted();
             System.out.println(format);
             System.out.println("Nice! I've marked this task as done:\n");
-            System.out.println(taskArray[doneItem]);
+            System.out.println(taskArrayList.get(doneItem));
             System.out.println(format);
         }
 
@@ -53,8 +61,8 @@ public class Duke {
                 throw new EmptyDescriptionException(userInput[0]);
             }
             System.out.println(format);
-            taskArray[count] = new ToDo (userInput[1]);
-            count = taskAdder(taskArray, count);
+            taskArrayList.add(new ToDo (userInput[1]));
+            count = taskAdder(taskArrayList, count);
             System.out.println(format);
         }
 
@@ -67,8 +75,8 @@ public class Duke {
             }
             System.out.println(format);
             String[] deadlineArray = mainTask.trim().split("/by", 2);
-            taskArray[count] = new Deadline (deadlineArray[0], deadlineArray[1]);
-            count = taskAdder(taskArray, count);
+            taskArrayList.add(new Deadline(deadlineArray[0],deadlineArray[1]));
+            count = taskAdder(taskArrayList, count);
             System.out.println(format);
         }
 
@@ -81,10 +89,22 @@ public class Duke {
             }
             System.out.println(format);
             String[] eventArray = mainTask.trim().split("/at", 2);
-            taskArray[count] = new Event (eventArray[0], eventArray[1]);
-            count = taskAdder(taskArray, count);
+            taskArrayList.add(new Event (eventArray[0], eventArray[1]));
+            count = taskAdder(taskArrayList, count);
             System.out.println(format);
-        } else {
+        }
+
+        else if (userInput[0].equals("delete")) {
+            if (mainTask == null) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            System.out.println(format);
+            count = taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1, count);
+            taskArrayList.remove(Integer.parseInt(userInput[1]) - 1);
+            System.out.println(format);
+        }
+
+        else {
             throw new WrongCommandException();
         }
     }
