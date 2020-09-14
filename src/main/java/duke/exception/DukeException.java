@@ -1,7 +1,9 @@
 package duke.exception;
 
-public abstract class DukeException extends Exception{
+public class DukeException extends Exception{
 
-    public abstract void displayException();
+    public void displayException(){
+
+    };
 
 }
