@@ -23,18 +23,19 @@ public class Duke {
     public static String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     static int count = 0;
 
-    public static int taskAdder(ArrayList<Task> taskArrayList, int count){
-        System.out.println("Got it. I've added this task: \n" + taskArrayList.get(count));
-        count++;
-        System.out.println("Now you have " + count + " tasks in the list");
-        return count;
+    public static void taskAdder(ArrayList<Task> taskArrayList) {//, int count){
+        System.out.println("Got it. I've added this task: \n" + taskArrayList.get(taskArrayList.size() - 1));
+        //count++;
+        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+        //return count;
     }
 
-    public static int taskRemover(ArrayList<Task> taskArrayList, int index, int count){
+    public static void taskRemover(ArrayList<Task> taskArrayList, int index){//, int count){
         System.out.println("Noted. I've removed this task: \n" + taskArrayList.get(index));
-        count--;
-        System.out.println("Now you have " + count + " tasks in the list");
-        return count;
+        //count--;
+        taskArrayList.remove(index);
+        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+        //return count;
     }
 
     public static void parseInput(String[] userInput) throws EmptyDescriptionException, WrongCommandException,
@@ -74,7 +75,8 @@ public class Duke {
             }
             System.out.println(format);
             taskArrayList.add(new ToDo (userInput[1]));
-            count = taskAdder(taskArrayList, count);
+            //count = taskAdder(taskArrayList, count);
+            taskAdder(taskArrayList);
             System.out.println(format);
             try {
                 writeFile();
@@ -94,7 +96,8 @@ public class Duke {
             System.out.println(format);
             String[] deadlineArray = mainTask.trim().split("/by", 2);
             taskArrayList.add(new Deadline(deadlineArray[0],deadlineArray[1]));
-            count = taskAdder(taskArrayList, count);
+            //count = taskAdder(taskArrayList, count);
+            taskAdder(taskArrayList);
             System.out.println(format);
             try {
                 writeFile();
@@ -114,7 +117,8 @@ public class Duke {
             System.out.println(format);
             String[] eventArray = mainTask.trim().split("/at", 2);
             taskArrayList.add(new Event (eventArray[0], eventArray[1]));
-            count = taskAdder(taskArrayList, count);
+            //count = taskAdder(taskArrayList, count);
+            taskAdder(taskArrayList);
             System.out.println(format);
         }
 
@@ -123,8 +127,9 @@ public class Duke {
                 throw new EmptyDescriptionException(userInput[0]);
             }
             System.out.println(format);
-            count = taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1, count);
-            taskArrayList.remove(Integer.parseInt(userInput[1]) - 1);
+            //taskArrayList.remove(Integer.parseInt(userInput[1]) - 1);
+            //count = taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1, count);
+            taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1);
             System.out.println(format);
             try {
                 writeFile();
