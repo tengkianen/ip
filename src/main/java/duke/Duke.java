@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.messages.Messages;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyDateException;
@@ -20,122 +21,122 @@ import java.nio.file.Path;
 public class Duke {
 
     static ArrayList <Task> taskArrayList = new ArrayList<Task>();
-    public static String format = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    public static String FORMAT = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     static int count = 0;
+    private static final String DONE_COMMAND = "done";
+    private static final String BYE_COMMAND = "bye";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String LIST_COMMAND = "list";
 
-    public static void taskAdder(ArrayList<Task> taskArrayList) {//, int count){
+    //Adds a task to the arraylist
+    public static void taskAdder(ArrayList<Task> taskArrayList) {
         System.out.println("Got it. I've added this task: \n" + taskArrayList.get(taskArrayList.size() - 1));
-        //count++;
         System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
-        //return count;
     }
 
-    public static void taskRemover(ArrayList<Task> taskArrayList, int index){//, int count){
+    //Removes particular task from arraylist
+    public static void taskRemover(ArrayList<Task> taskArrayList, int index){
         System.out.println("Noted. I've removed this task: \n" + taskArrayList.get(index));
-        //count--;
         taskArrayList.remove(index);
         System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
-        //return count;
     }
 
+    //Parses input in order to process user command
     public static void parseInput(String[] userInput) throws EmptyDescriptionException, WrongCommandException,
             EmptyDateException{
         String mainTask = userInput.length == 2 ? userInput[1] : null;
-        if (userInput[0].equals("bye")) { //EXITS PROGRAM
-            System.out.println(format);
-            System.out.println("Bye. Hope to see you again soon!\n");
-            System.out.println(format);
-        } else if (userInput[0].equals("list")){ //LISTS ALL TASKS
+        if (userInput[0].equals(BYE_CMD)) { //EXITS PROGRAM
+            System.out.println(FORMAT);
+            System.out.println(Messages.MESSAGE_BYE);
+            System.out.println(FORMAT);
+        } else if (userInput[0].equals(LIST_COMMAND)){ //LISTS ALL TASKS
             int numberedPoint = 1;
-            System.out.println(format);
-            System.out.println("Here are the tasks in your list:\n");
+            System.out.println(FORMAT);
+            System.out.println(Messages.MESSAGE_LIST_TASKS);
             for(Task task : taskArrayList){
                 System.out.println(numberedPoint + ". " + task);
                 numberedPoint++;
             }
-            System.out.println(format);
+            System.out.println(FORMAT);
 
-        } else if (userInput[0].equals("done")){ //COMPLETING A TASK
+        } else if (userInput[0].equals(DONE_CMD)){ //COMPLETING A TASK
             int doneItem = Integer.parseInt(userInput[1]) - 1;
             taskArrayList.get(doneItem).isCompleted();
-            System.out.println(format);
-            System.out.println("Nice! I've marked this task as done:\n");
+            System.out.println(FORMAT);
+            System.out.println(Messages.MESSAGE_DONE_TASK);
             System.out.println(taskArrayList.get(doneItem));
-            System.out.println(format);
+            System.out.println(FORMAT);
             try {
                 writeFile();
             } catch (IOException | DukeException e) {
-                System.out.println("There was a problem saving your task! Please try again!");
+                System.out.println(Messages.MESSAGE_SAVE_ERROR);
             }
         }
 
-        else if (userInput[0].equals("todo")){ //ADDING A TODO
+        else if (userInput[0].equals(TODO_COMMAND)){ //ADDING A TODO
             if (mainTask == null){
                 throw new EmptyDescriptionException(userInput[0]);
             }
-            System.out.println(format);
+            System.out.println(FORMAT);
             taskArrayList.add(new ToDo (userInput[1]));
-            //count = taskAdder(taskArrayList, count);
             taskAdder(taskArrayList);
-            System.out.println(format);
+            System.out.println(FORMAT);
             try {
                 writeFile();
             } catch (IOException | DukeException e) {
-                System.out.println("There was a problem saving your task! Please try again!");
-                System.out.println(format);
+                System.out.println(Messages.MESSAGE_SAVE_ERROR);
+                System.out.println(FORMAT);
             }
         }
 
-        else if (userInput[0].equals("deadline")){ //ADDING A DEADLINE
+        else if (userInput[0].equals(DEADLINE_COMMAND)){ //ADDING A DEADLINE
             if (mainTask == null){
                 throw new EmptyDescriptionException(userInput[0]);
             }
             if (!mainTask.contains("/by")){
                 throw new EmptyDateException();
             }
-            System.out.println(format);
-            String[] deadlineArray = mainTask.trim().split("/by", 2);
-            taskArrayList.add(new Deadline(deadlineArray[0],deadlineArray[1]));
-            //count = taskAdder(taskArrayList, count);
+            System.out.println(FORMAT);
+            String[] deadlines = mainTask.trim().split("/by", 2);
+            taskArrayList.add(new Deadline(deadlines[0],deadlines[1]));
             taskAdder(taskArrayList);
-            System.out.println(format);
+            System.out.println(FORMAT);
             try {
                 writeFile();
             } catch (IOException | DukeException e) {
-                System.out.println("There was a problem saving your task! Please try again!");
-                System.out.println(format);
+                System.out.println(Messages.MESSAGE_SAVE_ERROR);
+                System.out.println(FORMAT);
             }
         }
 
-        else if (userInput[0].equals("event")){ //ADDING AN EVENT
+        else if (userInput[0].equals(EVENT_COMMAND)){ //ADDING AN EVENT
             if (mainTask == null){
                 throw new EmptyDescriptionException(userInput[0]);
             }
             if (!mainTask.contains("/at")){
                 throw new EmptyDateException();
             }
-            System.out.println(format);
+            System.out.println(FORMAT);
             String[] eventArray = mainTask.trim().split("/at", 2);
             taskArrayList.add(new Event (eventArray[0], eventArray[1]));
-            //count = taskAdder(taskArrayList, count);
             taskAdder(taskArrayList);
-            System.out.println(format);
+            System.out.println(FORMAT);
         }
 
         else if (userInput[0].equals("delete")) {
             if (mainTask == null) {
                 throw new EmptyDescriptionException(userInput[0]);
             }
-            System.out.println(format);
-            //taskArrayList.remove(Integer.parseInt(userInput[1]) - 1);
-            //count = taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1, count);
+            System.out.println(FORMAT);
             taskRemover(taskArrayList, Integer.parseInt(userInput[1]) - 1);
-            System.out.println(format);
+            System.out.println(FORMAT);
             try {
                 writeFile();
             } catch (IOException | DukeException e) {
-                System.out.println("There was a problem saving your task! Please try again!");
-                System.out.println(format);
+                System.out.println(Messages.MESSAGE_SAVE_ERROR);
+                System.out.println(FORMAT);
             }
         }
 
@@ -224,16 +225,15 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        System.out.println(format);
-        System.out.println("Hey I'm Butler!\n");
-        System.out.println("How can I help you Monsieur/Madame?\n");
-        System.out.println(format);
+        System.out.println(FORMAT);
+        System.out.println(Messages.MESSAGE_HELLO);
+        System.out.println(FORMAT);
         String[] stringArray;
 
         try {
             readFile();
         } catch (IOException | DukeException e) {
-            System.out.println("There was an error reading saved data!");
+            System.out.println(Message.READ_ERROR);
         }
 
         do {
@@ -252,7 +252,7 @@ public class Duke {
                 e.displayException();
             }
             
-        } while (!stringArray[0].equals("bye"));
+        } while (!stringArray[0].equals(BYE_COMMAND));
 
     }
 }
