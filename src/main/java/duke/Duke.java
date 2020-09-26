@@ -1,22 +1,22 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import duke.messages.Messages;
 import duke.exception.DukeException;
-import duke.exception.EmptyDescriptionException;
 import duke.exception.EmptyDateException;
+import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongCommandException;
+import duke.messages.Messages;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -47,7 +47,7 @@ public class Duke {
     public static void parseInput(String[] userInput) throws EmptyDescriptionException, WrongCommandException,
             EmptyDateException{
         String mainTask = userInput.length == 2 ? userInput[1] : null;
-        if (userInput[0].equals(BYE_CMD)) { //EXITS PROGRAM
+        if (userInput[0].equals(BYE_COMMAND)) { //EXITS PROGRAM
             System.out.println(FORMAT);
             System.out.println(Messages.MESSAGE_BYE);
             System.out.println(FORMAT);
@@ -61,7 +61,7 @@ public class Duke {
             }
             System.out.println(FORMAT);
 
-        } else if (userInput[0].equals(DONE_CMD)){ //COMPLETING A TASK
+        } else if (userInput[0].equals(DONE_COMMAND)){ //COMPLETING A TASK
             int doneItem = Integer.parseInt(userInput[1]) - 1;
             taskArrayList.get(doneItem).isCompleted();
             System.out.println(FORMAT);
@@ -233,7 +233,7 @@ public class Duke {
         try {
             readFile();
         } catch (IOException | DukeException e) {
-            System.out.println(Message.READ_ERROR);
+            System.out.println(Messages.MESSAGE_READ_ERROR);
         }
 
         do {
