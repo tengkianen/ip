@@ -1,3 +1,5 @@
 [D]|true|proj | tmr
-[T]|false|hw
-
+[T]|true|hw
+[T]|true|help
+[T]|true|handsome
+[T]|true|chiobu

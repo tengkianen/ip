@@ -10,4 +10,5 @@ public class Messages {
     public static final String MESSAGE_COMMAND_ERROR = "Sorry! This is an invalid command, Please try again!\n" +
             "These are the available commands: \n- todo [todoName]\n- deadline [deadlineName] /by [deadlineDate]\n" +
             "- event [eventName] /at [eventTime]\n- list\n- done [listNumber]\n- bye\n";
+    public static final String MESSAGE_INDEX_ERROR = "Index out of range!";
 }
