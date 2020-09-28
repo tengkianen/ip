@@ -1,5 +1,3 @@
-[D]|true|proj | tmr
-[T]|true|hw
-[T]|true|help
-[T]|true|handsome
-[T]|true|chiobu
+[T]|true|homework
+[E]|true|christmas party | my place
+[D]|true|tP | next weekend
