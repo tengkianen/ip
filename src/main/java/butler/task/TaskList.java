@@ -42,11 +42,9 @@ public class TaskList {
         textUI.printTaskList(taskArrayList);
     }
 
-<<<<<<< HEAD:src/main/java/butler/task/TaskList.java
     /**
      * Saves taskArrayList into tasks.txt using Storage.writeFile() method
      */
-=======
     public ArrayList<Task> findTasks (String mainTask, String[] userInput)
             throws EmptyDescriptionException {
         if (mainTask == null) {
@@ -61,7 +59,6 @@ public class TaskList {
         return foundTasks;
     }
 
->>>>>>> origin/master:src/main/java/duke/task/TaskList.java
     public void save() {
         Storage storage = new Storage();
         try {

@@ -28,6 +28,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns a String containing the status icon of the Task
      *

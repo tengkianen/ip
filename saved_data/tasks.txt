@@ -1,4 +1,0 @@
-[T]|true|homework
-[E]|true|christmas party | my place
-[D]|true|tP | next weekend
-[E]|false|homework | my house
