@@ -10,6 +10,7 @@ import duke.storage.Storage;
 import duke.ui.TextUI;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static duke.Duke.*;
@@ -33,6 +34,20 @@ public class TaskList {
     public void list() {
         TextUI textUI = new TextUI();
         textUI.printTaskList(taskArrayList);
+    }
+
+    public ArrayList<Task> findTasks (String mainTask, String[] userInput)
+            throws EmptyDescriptionException {
+        if (mainTask == null) {
+            throw new EmptyDescriptionException(userInput[0]);
+        }
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : taskArrayList) {
+            if (task.getDescription().contains(mainTask)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
     }
 
     public void save() {
