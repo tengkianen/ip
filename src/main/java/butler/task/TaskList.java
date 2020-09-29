@@ -1,19 +1,22 @@
-package duke.task;
+package butler.task;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.OutOfLimitException;
-import duke.messages.Messages;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.ui.TextUI;
+import butler.exception.DukeException;
+import butler.exception.EmptyDateException;
+import butler.exception.EmptyDescriptionException;
+import butler.exception.OutOfLimitException;
+import butler.messages.Messages;
+import butler.parser.Parser;
+import butler.storage.Storage;
+import butler.ui.TextUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static duke.Duke.*;
+import static butler.Butler.*;
 
+/**
+ * Contains methods used for handling the ArrayList of Tasks
+ */
 public class TaskList {
 
     public static ArrayList<Task> taskArrayList;
@@ -30,11 +33,17 @@ public class TaskList {
         return taskArrayList;
     }
 
+    /**
+     * Prints taskArrayList using TextUI.printTaskList() method
+     */
     public void list() {
         TextUI textUI = new TextUI();
         textUI.printTaskList(taskArrayList);
     }
 
+    /**
+     * Saves taskArrayList into tasks.txt using Storage.writeFile() method
+     */
     public void save() {
         Storage storage = new Storage();
         try {
@@ -45,6 +54,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Todo into the taskArrayList
+     *
+     * @param mainTask Description of the task to be added
+     * @param userInput String Array of the task type and description
+     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
+     */
     public void addTodo (String mainTask, String[] userInput) throws EmptyDescriptionException {
         TextUI textUI = new TextUI();
         if (mainTask == null){
@@ -55,6 +71,14 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Adds a Deadline into the taskArrayList
+     *
+     * @param mainTask Description of the task to be added
+     * @param userInput String Array of the task type, description and date/time
+     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
+     * @throws EmptyDateException If error occurs due to user not inputting a date/time
+     */
     public void addDeadline (String mainTask, String[] userInput)
             throws EmptyDescriptionException, EmptyDateException {
         TextUI textUI = new TextUI();
@@ -71,6 +95,14 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Adds an Event into the taskArrayList
+     *
+     * @param mainTask Description of the task to be added
+     * @param userInput String Array of the task type, description and date/time
+     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
+     * @throws EmptyDateException If error occurs due to user not inputting a date/time
+     */
     public void addEvent (String mainTask, String[] userInput)
             throws EmptyDescriptionException, EmptyDateException {
         TextUI textUI = new TextUI();
@@ -87,6 +119,14 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Setting a task to be completed
+     *
+     * @param mainTask Index of the task to be edited
+     * @param userInput String Array of the 'done' command and the index to be edited
+     * @throws EmptyDescriptionException If error occurs due to user not inputting an index
+     * @throws OutOfLimitException If error occurs due to user inputting an invalid index
+     */
     public void setDoneStatus (String mainTask, String[] userInput)
             throws EmptyDescriptionException, OutOfLimitException {
         TextUI textUI = new TextUI();
@@ -101,6 +141,14 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Deletes a Task from the taskArrayList
+     *
+     * @param mainTask Index of the task to be deleted
+     * @param userInput String Array of the 'delete' command and the index to be deleted
+     * @throws EmptyDescriptionException If error occurs due to user not inputting an index
+     * @throws OutOfLimitException If error occurs due to user inputting an invalid index
+     */
     public void deleteTask (String mainTask, String[] userInput)
             throws EmptyDescriptionException, OutOfLimitException {
         TextUI textUI = new TextUI();
