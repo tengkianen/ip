@@ -1,11 +1,12 @@
-package duke.parser;
+package butler.parser;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.OutOfLimitException;
-import duke.exception.WrongCommandException;
-import duke.task.*;
-import duke.ui.TextUI;
+import butler.exception.EmptyDateException;
+import butler.exception.EmptyDescriptionException;
+import butler.exception.OutOfLimitException;
+import butler.exception.WrongCommandException;
+import butler.task.*;
+import butler.ui.TextUI;
+
 
 public class Parser {
 
@@ -21,6 +22,16 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Handles the input entered by user
+     *
+     * @param userInput Input entered by the user
+     * @param taskList ArrayList of Tasks
+     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
+     * @throws OutOfLimitException If error occurs due to user inputting invalid values
+     * @throws EmptyDateException If error occurs due to user not inputting date/time
+     * @throws WrongCommandException If error occurs due to user inputting an invalid command
+     */
     public void parseInput(String[] userInput, TaskList taskList) throws EmptyDescriptionException, OutOfLimitException
             , EmptyDateException, WrongCommandException {
         TextUI textUI = new TextUI();
@@ -56,10 +67,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Splits the String mainTask to acquire the date and time of the event
+     *
+     * @param mainTask String to be split
+     * @return String Array containing split String
+     */
     public String[] parseEvent(String mainTask) {
         return mainTask.trim().split("/at", 2);
     }
 
+    /**
+     * Splits the String mainTask to acquire the date and time of the deadline
+     *
+     * @param mainTask String to be split
+     * @return String Array containing split String
+     */
     public String[] parseDeadline(String mainTask) {
         return mainTask.trim().split("/by", 2);
     }

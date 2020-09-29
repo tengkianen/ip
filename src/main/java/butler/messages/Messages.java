@@ -1,5 +1,8 @@
-package duke.messages;
+package butler.messages;
 
+/**
+ * Class containing message strings Duke uses
+ */
 public class Messages {
     public static final String MESSAGE_BYE = "Bye. Hope to see you again soon!\n";
     public static final String MESSAGE_LIST_TASKS = "Here are the tasks in your list:\n";

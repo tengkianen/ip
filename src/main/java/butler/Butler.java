@@ -1,15 +1,15 @@
-package duke;
+package butler;
 
-import duke.exception.*;
-import duke.messages.Messages;
-import duke.storage.Storage;
-import duke.task.*;
-import duke.ui.TextUI;
-import duke.parser.Parser;
+import butler.exception.*;
+import butler.messages.Messages;
+import butler.storage.Storage;
+import butler.task.*;
+import butler.ui.TextUI;
+import butler.parser.Parser;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke {
+public class Butler {
 
     public static String FORMAT = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private static final String BYE_COMMAND = "bye";
@@ -17,7 +17,10 @@ public class Duke {
     private TaskList tasks;
     private TextUI textUI;
 
-    public Duke() {
+    /**
+     * Constructor to initialize a new Duke class
+     */
+    public Butler() {
         textUI = new TextUI();
         storage = new Storage();
         try {
@@ -27,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to start running the Duke class
+     */
     public void run() {
 
         TextUI textUI = new TextUI();
@@ -62,9 +68,14 @@ public class Duke {
         } while (!stringArray[0].equals(BYE_COMMAND));
     }
 
+    /**
+     * Main driver function for Butler
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
-        new Duke().run();
+        new Butler().run();
 
         }
 }

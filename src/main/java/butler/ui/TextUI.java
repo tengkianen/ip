@@ -1,7 +1,7 @@
-package duke.ui;
+package butler.ui;
 
-import duke.messages.Messages;
-import duke.task.Task;
+import butler.messages.Messages;
+import butler.task.Task;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -12,26 +12,45 @@ public class TextUI {
 
     private static final String FORMAT = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
+    /**
+     * Constructor for TextUI
+     */
     public TextUI() {
         this(System.in);
     }
 
+    /**
+     * Constructor for TextUI given an InputStream
+     *
+     * @param in InputStream
+     */
     public TextUI(InputStream in) {
         Scanner in1 = new Scanner(in);
     }
 
+    /**
+     * Displays a message upon entering the program
+     */
     public void printHelloMessage() {
         System.out.println(FORMAT);
         System.out.println(Messages.MESSAGE_HELLO);
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays a message upon exiting the program
+     */
     public void printByeMessage() {
         System.out.println(FORMAT);
         System.out.println(Messages.MESSAGE_BYE);
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays a message upon adding a Task into the taskArrayList
+     *
+     * @param taskArrayList ArrayList containing Tasks
+     */
     public void printAddMessage(ArrayList<Task> taskArrayList) {
         System.out.println(FORMAT);
         System.out.println("Got it. I've added this task: \n" + taskArrayList.get(taskArrayList.size() - 1));
@@ -39,6 +58,12 @@ public class TextUI {
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays a message upon deleting a Task
+     *
+     * @param taskArrayList ArrayList containing Tasks
+     * @param index Integer containing the Task's index to be deleted
+     */
     public void printDeleteMessage(ArrayList<Task> taskArrayList, int index) {
         System.out.println(FORMAT);
         System.out.println("Noted. I've removed this task: \n" + taskArrayList.get(index));
@@ -47,6 +72,12 @@ public class TextUI {
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays message upon setting a Task as done
+     *
+     * @param taskArrayList ArrayList containing Tasks
+     * @param doneItem Integer containing the Task's index to be set as done
+     */
     public void printFinishTaskMessage(ArrayList<Task> taskArrayList, int doneItem) {
         taskArrayList.get(doneItem).isCompleted();
         System.out.println(FORMAT);
@@ -55,6 +86,11 @@ public class TextUI {
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays an ArrayList of Tasks
+     *
+     * @param taskArrayList ArrayList containing Tasks
+     */
     public void printTaskList(ArrayList<Task> taskArrayList) {
         int numberedPoint = 1;
         System.out.println(FORMAT);
@@ -66,6 +102,9 @@ public class TextUI {
         System.out.println(FORMAT);
     }
 
+    /**
+     * Displays a message when there's an error loading the file
+     */
     public void showLoadingError() {
         System.out.println(FORMAT);
         System.out.println(Messages.MESSAGE_READ_ERROR);

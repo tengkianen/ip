@@ -1,7 +1,7 @@
-package duke.storage;
+package butler.storage;
 
-import duke.exception.DukeException;
-import duke.task.*;
+import butler.exception.DukeException;
+import butler.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,7 +15,13 @@ public class Storage {
 
     private static final String PATH_DIRECTORY = new File("saved_data").getAbsolutePath();
 
-    //Reads file and adds to the arraylist
+    /**
+     * Loads an ArrayList of tasks processed from Duke's storage
+     *
+     * @return ArrayList containing Tasks from Duke's storage
+     * @throws DukeException If the data directory does not exist
+     * @throws IOException If there is a problem reading the file
+     */
     public ArrayList<Task> readFile() throws DukeException, IOException {
 
         TaskList taskList = new TaskList();
@@ -43,6 +49,12 @@ public class Storage {
         return taskList.getTaskArrayList();
     }
 
+    /**
+     * Decodes data read from txt file in the ReadFile() method
+     *
+     * @param data String Array obtained from the txt file
+     * @param taskList ArrayList to hold all the Tasks
+     */
     public static void taskAssigner(String[] data, TaskList taskList) {
         String description;
         boolean isDone;
@@ -71,6 +83,13 @@ public class Storage {
 
     }
 
+    /**
+     * Saves ArrayList of Tasks into Duke's storage following a specific format
+     *
+     * @param taskArrayList ArrayList of all Tasks
+     * @throws IOException if error occurs while writing to a file
+     * @throws DukeException if specified directory does not exist
+     */
     public static void writeFile(ArrayList<Task> taskArrayList) throws IOException, DukeException {
         String dataPath = new File("saved_data/tasks.txt").getAbsolutePath();
         StringBuilder fullString = new StringBuilder();
