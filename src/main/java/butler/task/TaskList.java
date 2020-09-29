@@ -10,6 +10,7 @@ import butler.storage.Storage;
 import butler.ui.TextUI;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static butler.Butler.*;
@@ -41,9 +42,26 @@ public class TaskList {
         textUI.printTaskList(taskArrayList);
     }
 
+<<<<<<< HEAD:src/main/java/butler/task/TaskList.java
     /**
      * Saves taskArrayList into tasks.txt using Storage.writeFile() method
      */
+=======
+    public ArrayList<Task> findTasks (String mainTask, String[] userInput)
+            throws EmptyDescriptionException {
+        if (mainTask == null) {
+            throw new EmptyDescriptionException(userInput[0]);
+        }
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : taskArrayList) {
+            if (task.getDescription().contains(mainTask)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+    }
+
+>>>>>>> origin/master:src/main/java/duke/task/TaskList.java
     public void save() {
         Storage storage = new Storage();
         try {

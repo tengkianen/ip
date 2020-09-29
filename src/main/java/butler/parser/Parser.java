@@ -17,6 +17,7 @@ public class Parser {
     private static final String EVENT_COMMAND = "event";
     private static final String LIST_COMMAND = "list";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     public Parser() {
     }
@@ -57,6 +58,9 @@ public class Parser {
             break;
         case DELETE_COMMAND:
             taskList.deleteTask(mainTask, userInput);
+            break;
+        case FIND_COMMAND:
+            textUI.printTaskList(taskList.findTasks(mainTask, userInput));
             break;
         default:
             throw new WrongCommandException();
