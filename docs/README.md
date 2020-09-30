@@ -38,11 +38,11 @@ Examples:
 
 Expected Outcome:
 * `Got it. I've added this task: `
-`[T][✘] CS2113T Repl.it Exercises `
-`Now you have _ task(s) in the list `
-* `Got it. I've added this task: \`
-`[T][✘] Order GrabFood for grandma \`
-`Now you have _ task(s) in the list`
+  `[T][✘] CS2113T Repl.it Exercises `
+  `Now you have _ task(s) in the list `
+* `Got it. I've added this task: `
+  `[T][✘] Order GrabFood for grandma `
+  `Now you have _ task(s) in the list`
 
 ### Adding a Deadline Task: `deadline`
 Adds a Deadline to the task list
