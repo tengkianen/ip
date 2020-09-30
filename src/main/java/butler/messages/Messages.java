@@ -14,4 +14,7 @@ public class Messages {
             "These are the available commands: \n- todo [todoName]\n- deadline [deadlineName] /by [deadlineDate]\n" +
             "- event [eventName] /at [eventTime]\n- list\n- done [listNumber]\n- bye\n- find [keyword]";
     public static final String MESSAGE_INDEX_ERROR = "Index out of range!";
+    public static final String MESSAGE_HELP_COMMAND = "These are the available commands: \n- todo [todoName]\n" +
+            "- deadline [deadlineName] /by [deadlineDate]\n" +
+            "- event [eventName] /at [eventTime]\n- list\n- done [listNumber]\n- bye\n- find [keyword]";
 }

@@ -87,6 +87,15 @@ public class TextUI {
     }
 
     /**
+     * Displays all possible commands that can be used
+     */
+    public void printHelpMessage() {
+        System.out.println(FORMAT);
+        System.out.println(Messages.MESSAGE_HELP_COMMAND);
+        System.out.println(FORMAT);
+    }
+
+    /**
      * Displays an ArrayList of Tasks
      *
      * @param taskArrayList ArrayList containing Tasks
