@@ -50,7 +50,6 @@ Expected Outcome:
   [T][✘] Order GrabFood for grandma
   
   Now you have _ task(s) in the list
-```
 
 ### Adding a Deadline Task: `deadline`
 Adds a Deadline to the task list
