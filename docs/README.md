@@ -37,12 +37,20 @@ Examples:
 * `todo Order GrabFood for grandma`
 
 Expected Outcome:
-* `Got it. I've added this task:`⋅⋅
-  `[T][✘] CS2113T Repl.it Exercises`⋅⋅
-  `Now you have _ task(s) in the list`
-* `Got it. I've added this task:`⋅⋅
-  `[T][✘] Order GrabFood for grandma`⋅⋅
-  `Now you have _ task(s) in the list`⋅⋅
+* ```
+  Got it. I've added this task:
+
+  [T][✘] CS2113T Repl.it Exercises
+
+  Now you have _ task(s) in the list
+```
+* ```
+  Got it. I've added this task:
+  
+  [T][✘] Order GrabFood for grandma
+  
+  Now you have _ task(s) in the list
+```
 
 ### Adding a Deadline Task: `deadline`
 Adds a Deadline to the task list
@@ -55,12 +63,21 @@ Examples:
 
 Expected Outcome:
 
-* `Got it. I've added this task: ` 
-`[D][✘] Implement 'List' function for tP  (by:  Wednesday 2230) `
-`Now you have _ task(s) in the list `
-* `Got it. I've added this task: `
-`[D][✘] Submit CS2113T Assignment  (by:  20th Oct 9PM) `
-`Now you have _ task(s) in the list `
+* ```
+  
+  Got it. I've added this task: ` 
+  
+  [D][✘] Implement 'List' function for tP  (by:  Wednesday 2230) `
+  
+  Now you have _ task(s) in the list 
+```
+* ```
+  Got it. I've added this task: 
+  
+  [D][✘] Submit CS2113T Assignment  (by:  20th Oct 9PM) 
+  
+  Now you have _ task(s) in the list 
+```
 
 ### Adding an Event Task: `event`
 Adds an Event to the task list
@@ -72,12 +89,20 @@ Examples:
 * `event CS2113T Finals /at 1st Dec 1PM`
 
 Expected Outcome:
-* `Got it. I've added this task: `
-`[E][✘] 2021 Countdown Party  (at:  Siloso Beach 2000) `
-`Now you have _ task(s) in the list `
-* `Got it. I've added this task: `
-`[E][✘] CS2113T Finals  (at:  1st Dec 1PM) `
-`Now you have _ task(s) in the list `
+* ```
+  Got it. I've added this task: 
+
+  [E][✘] 2021 Countdown Party  (at:  Siloso Beach 2000) 
+  
+  Now you have _ task(s) in the list 
+
+* ```
+  Got it. I've added this task: 
+
+  [E][✘] CS2113T Finals  (at:  1st Dec 1PM) 
+
+  Now you have _ task(s) in the list 
+```
 
 ### Listing all tasks: `list`
 Lists all tasks in the task list
@@ -88,10 +113,12 @@ Example:
 * `list`
 
 Expected Outcome:
-* `Here are the tasks in your list: `
-`                                    `
-`1. [T][✘] CS2113T Repl.it Exercises `
-`2. [T][✘] Order GrabFood for grandma `
+* ```
+  Here are the tasks in your list:
+
+  1. [T][✘] CS2113T Repl.it Exercises 
+  2. [T][✘] Order GrabFood for grandma 
+```
 
 ### Finding tasks by keyword: `find`
 Given a keyword, find tasks with description that contain the specified keyword
@@ -103,13 +130,16 @@ Examples:
 * `find Countdown Party`
 
 Expected Output:
-* `Here are the tasks in your list: `
-`                                     `
-`1. [T][✘] Order GrabFood for grandma `
-* `Here are the tasks in your list: `
-`                                   `
-`1. [E][✘] 2021 Countdown Party  (at:  Siloso Beach 2000) `
+* ```
+  Here are the tasks in your list:
 
+  1. [T][✘] Order GrabFood for grandma
+```
+* ``` 
+  Here are the tasks in your list: 
+
+  1. [E][✘] 2021 Countdown Party  (at:  Siloso Beach 2000)
+```
 
 ### Marking task as done: `done`
 Set a task as done
@@ -121,12 +151,16 @@ Examples:
 * `done 5`
 
 Expected Output:
-* `Nice! I've marked this task as done: `
-`                                    `
-`[T][✓] Order GrabFood for grandma `
-* `Nice! I've marked this task as done: `
-`                                      `
-`[E][✓] 2021 Countdown Party  (at:  Siloso Beach 2000) `
+* ```
+  Nice! I've marked this task as done:
+
+  [T][✓] Order GrabFood for grandma
+```
+* ```
+  Nice! I've marked this task as done:
+
+  [E][✓] 2021 Countdown Party  (at:  Siloso Beach 2000)
+```
 
 ### Deleting a task: `delete`
 Deletes a task of given index
@@ -138,12 +172,15 @@ Examples:
 * `delete 3`
 
 Expected Output:
-* `Noted. I've removed this task: `
-`[T][✓] Order GrabFood for grandma `
-`Now you have _ task(s) in the list `
-* `Noted. I've removed this task: `
-`[D][✘] Submit CS2113T Assignment  (by:  20th Oct 9PM) `
-`Now you have _ task(s) in the list `
+* ```
+  Noted. I've removed this task: 
+  [T][✓] Order GrabFood for grandma
+  Now you have _ task(s) in the list
+```
+* ```
+  Noted. I've removed this task: 
+  [D][✘] Submit CS2113T Assignment  (by:  20th Oct 9PM) 
+  Now you have _ task(s) in the list 
 
 ### Exiting Butler: `bye`
 Ends the program
