@@ -43,7 +43,6 @@ Expected Outcome:
   [T][✘] CS2113T Repl.it Exercises
 
   Now you have _ task(s) in the list
-```
 
 * ```
   Got it. I've added this task:
