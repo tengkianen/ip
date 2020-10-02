@@ -35,7 +35,6 @@ public class Butler {
      */
     public void run() {
 
-        TextUI textUI = new TextUI();
         Storage storage = new Storage();
         Parser parser = new Parser();
         textUI.printHelloMessage();

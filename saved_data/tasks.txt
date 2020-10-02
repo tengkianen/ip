@@ -1,4 +1,7 @@
-[T]|false|CS2113T Repl.it Exercises
 [D]|false|Implement 'List' function for tP | Wednesday 2230
 [E]|true|2021 Countdown Party | Siloso Beach 2000
-[E]|false|CS2113T Finals | 1st Dec 1PM
+[E]|true|CS2113T Finals | 1st Dec 1PM
+[E]|true|checkup | hospital
+[T]|true|1
+[D]|false|2 | tmr
+[E]|false|3 | 3rd dec

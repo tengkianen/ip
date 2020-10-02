@@ -4,7 +4,7 @@ import butler.exception.EmptyDateException;
 import butler.exception.EmptyDescriptionException;
 import butler.exception.OutOfLimitException;
 import butler.exception.WrongCommandException;
-import butler.task.*;
+import butler.task.TaskList;
 import butler.ui.TextUI;
 
 
@@ -36,32 +36,50 @@ public class Parser {
     public void parseInput(String[] userInput, TaskList taskList) throws EmptyDescriptionException, OutOfLimitException
             , EmptyDateException, WrongCommandException {
         TextUI textUI = new TextUI();
-        String mainTask = userInput.length == 2 ? userInput[1] : null;
+
 
         switch (userInput[0]) {
-        case BYE_COMMAND:  //EXITS PROGRAM
+        case BYE_COMMAND:
             textUI.printByeMessage();
             break;
-        case LIST_COMMAND:  //LISTS ALL TASKS
+        case LIST_COMMAND:
             taskList.list();
             break;
-        case DONE_COMMAND:  //COMPLETING A TASK
-            taskList.setDoneStatus(mainTask, userInput);
+        case DONE_COMMAND:
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            taskList.setDoneStatus(userInput);
             break;
-        case TODO_COMMAND:  //ADDING A TODO
-            taskList.addTodo(mainTask, userInput);
+        case TODO_COMMAND:
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            taskList.addTodo(userInput);
             break;
-        case DEADLINE_COMMAND:  //ADDING A DEADLINE
-            taskList.addDeadline(mainTask, userInput);
+        case DEADLINE_COMMAND:
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            taskList.addDeadline(userInput);
             break;
-        case EVENT_COMMAND:  //ADDING AN EVENT
-            taskList.addEvent(mainTask, userInput);
+        case EVENT_COMMAND:
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            taskList.addEvent(userInput);
             break;
         case DELETE_COMMAND:
-            taskList.deleteTask(mainTask, userInput);
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            taskList.deleteTask(userInput);
             break;
         case FIND_COMMAND:
-            textUI.printTaskList(taskList.findTasks(mainTask, userInput));
+            if (userInput.length < 2) {
+                throw new EmptyDescriptionException(userInput[0]);
+            }
+            textUI.printTaskList(taskList.findTasks(userInput));
             break;
         case HELP_COMMAND:
             textUI.printHelpMessage();

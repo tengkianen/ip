@@ -10,7 +10,6 @@ import butler.storage.Storage;
 import butler.ui.TextUI;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static butler.Butler.*;
@@ -43,22 +42,24 @@ public class TaskList {
     }
 
     /**
-     * Saves taskArrayList into tasks.txt using Storage.writeFile() method
+     * Finds tasks with description that matches with user input
+     *
+     * @param userInput String Array of the task type and description
+     * @return an ArrayList of Tasks that contain the keyword
      */
-    public ArrayList<Task> findTasks (String mainTask, String[] userInput)
-            throws EmptyDescriptionException {
-        if (mainTask == null) {
-            throw new EmptyDescriptionException(userInput[0]);
-        }
+    public ArrayList<Task> findTasks(String[] userInput) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : taskArrayList) {
-            if (task.getDescription().contains(mainTask)) {
+            if (task.getDescription().contains(userInput[1])) {
                 foundTasks.add(task);
             }
         }
         return foundTasks;
     }
 
+    /**
+     * Saves taskArrayList into tasks.txt using Storage.writeFile() method
+     */
     public void save() {
         Storage storage = new Storage();
         try {
@@ -72,15 +73,10 @@ public class TaskList {
     /**
      * Adds a Todo into the taskArrayList
      *
-     * @param mainTask Description of the task to be added
      * @param userInput String Array of the task type and description
-     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
      */
-    public void addTodo (String mainTask, String[] userInput) throws EmptyDescriptionException {
+    public void addTodo(String[] userInput) {
         TextUI textUI = new TextUI();
-        if (mainTask == null){
-            throw new EmptyDescriptionException(userInput[0]);
-        }
         taskArrayList.add(new ToDo (userInput[1]));
         textUI.printAddMessage(taskArrayList);
         save();
@@ -89,22 +85,17 @@ public class TaskList {
     /**
      * Adds a Deadline into the taskArrayList
      *
-     * @param mainTask Description of the task to be added
      * @param userInput String Array of the task type, description and date/time
-     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
      * @throws EmptyDateException If error occurs due to user not inputting a date/time
      */
-    public void addDeadline (String mainTask, String[] userInput)
-            throws EmptyDescriptionException, EmptyDateException {
+    public void addDeadline(String[] userInput)
+            throws EmptyDateException {
         TextUI textUI = new TextUI();
         Parser parser = new Parser();
-        if (mainTask == null){
-            throw new EmptyDescriptionException(userInput[0]);
-        }
-        if (!mainTask.contains("/by")){
+        if (!userInput[1].contains("/by")){
             throw new EmptyDateException();
         }
-        String[] deadlines = parser.parseDeadline(mainTask);
+        String[] deadlines = parser.parseDeadline(userInput[1]);
         taskArrayList.add(new Deadline(deadlines[0],deadlines[1]));
         textUI.printAddMessage(taskArrayList);
         save();
@@ -113,22 +104,17 @@ public class TaskList {
     /**
      * Adds an Event into the taskArrayList
      *
-     * @param mainTask Description of the task to be added
      * @param userInput String Array of the task type, description and date/time
-     * @throws EmptyDescriptionException If error occurs due to user not inputting a description
      * @throws EmptyDateException If error occurs due to user not inputting a date/time
      */
-    public void addEvent (String mainTask, String[] userInput)
-            throws EmptyDescriptionException, EmptyDateException {
+    public void addEvent(String[] userInput)
+            throws EmptyDateException {
         TextUI textUI = new TextUI();
         Parser parser = new Parser();
-        if (mainTask == null){
-            throw new EmptyDescriptionException(userInput[0]);
-        }
-        if (!mainTask.contains("/at")){
+        if (!userInput[1].contains("/at")){
             throw new EmptyDateException();
         }
-        String[] eventArray = parser.parseEvent(mainTask);
+        String[] eventArray = parser.parseEvent(userInput[1]);
         taskArrayList.add(new Event (eventArray[0], eventArray[1]));
         textUI.printAddMessage(taskArrayList);
         save();
@@ -137,17 +123,12 @@ public class TaskList {
     /**
      * Setting a task to be completed
      *
-     * @param mainTask Index of the task to be edited
      * @param userInput String Array of the 'done' command and the index to be edited
-     * @throws EmptyDescriptionException If error occurs due to user not inputting an index
      * @throws OutOfLimitException If error occurs due to user inputting an invalid index
      */
-    public void setDoneStatus (String mainTask, String[] userInput)
-            throws EmptyDescriptionException, OutOfLimitException {
+    public void setDoneStatus(String[] userInput)
+            throws OutOfLimitException {
         TextUI textUI = new TextUI();
-        if (mainTask == null){
-            throw new EmptyDescriptionException(userInput[0]);
-        }
         int doneItem = Integer.parseInt(userInput[1]) - 1;
         if (doneItem >= taskArrayList.size()) {
             throw new OutOfLimitException();
@@ -159,17 +140,12 @@ public class TaskList {
     /**
      * Deletes a Task from the taskArrayList
      *
-     * @param mainTask Index of the task to be deleted
      * @param userInput String Array of the 'delete' command and the index to be deleted
-     * @throws EmptyDescriptionException If error occurs due to user not inputting an index
      * @throws OutOfLimitException If error occurs due to user inputting an invalid index
      */
-    public void deleteTask (String mainTask, String[] userInput)
-            throws EmptyDescriptionException, OutOfLimitException {
+    public void deleteTask(String[] userInput)
+            throws OutOfLimitException {
         TextUI textUI = new TextUI();
-        if (mainTask == null) {
-            throw new EmptyDescriptionException(userInput[0]);
-        }
         int doneItem = Integer.parseInt(userInput[1]) - 1;
         if (doneItem >= taskArrayList.size()) {
             throw new OutOfLimitException();
